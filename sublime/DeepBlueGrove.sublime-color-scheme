@@ -1,0 +1,236 @@
+{
+    "name": "DeepBlueGrove",
+    "author": "DePopadopalis",
+    "variables":
+    {
+        "light_blue": "#399EE6",
+        "ice_blue": "#77e9ff",
+        "purple": "#663399",
+        "light_purple": "#7F00FF",
+        "dark_teal": "#006B84",
+        "orange": "#FF8F40",
+
+        "background": "#FAFAFC",
+        "foreground": "var(purple)",
+
+        // Unused or replaced colors
+        // "darker_purple": "#51008F",
+        // "main_blue": "#0811CC", // replaced with mediumblue
+        // "bright_green": "#00C420",
+    },
+    "globals":
+    {
+        "background": "var(background)",
+        "foreground": "var(foreground)",
+        "caret": "gold",
+
+        // Gutter
+        "gutter": "",
+        "line_highlight": "color(dimgray alpha(0.13))",
+        "gutter_foreground": "color(var(foreground) alpha(0.5))",
+
+        // Accents
+        "misspelling": "gold",
+        "fold_marker": "var(ice_blue)",
+        "minimap_border": "dimgray",
+        "accent": "gold",
+
+        // CSS
+        "popup_css": "",
+        "phantom_css": "",
+
+        // Selection
+        "selection": "color(var(light_blue) alpha(0.15))",
+        "selection_foreground": "",
+        "selection_border": "color(var(light_blue) alpha(0.5))",
+        "selection_border_width": "1",
+        "inactive_selection": "color(var(light_blue) alpha(0.1))",
+        "inactive_selection_foreground": "black",
+        // round, cut, square
+        "selection_corner_style": "round",
+        "selection_corner_radius": "3",
+
+        // Find
+        "highlight": "gold",
+        "find_highlight": "color(gold alpha(0.31))",
+        "find_highlight_foreground": "var(purple)",
+
+        // Guides
+        "guide": "color(dimgray alpha(0.1))",
+        "stack_guide": "color(dimgray alpha(0.3))",
+        "active_guide": "color(dimgray alpha(1))",
+
+        // Shadows
+        "shadow": "dimgray",
+        "shadow_width": "5",
+
+    },
+    "rules":
+    [
+        {
+            // comment.line: single-line comment
+            // comment.block: multi-line comment
+            // punctuation.definition.comment: symbols that delineate a comment "//", "/*"
+            // meta.toc-list: comments with special syntax that denote a section of code
+            "name": "Comment",
+            "scope": "comment",
+            "foreground": "color(dimgray alpha(.5))"
+        },
+        {
+            // multiline comments used as documentation
+            "name": "Doc Strings",
+            "scope": "comment.block.documentation",
+            "foreground": "color(dimgray alpha(.75))",
+            "font_style": ""
+        },
+        {
+            "name": "String",
+            "scope": "string",
+            "foreground": "mediumblue",
+        },
+        // Constants
+        {
+            "name": "Default Constant",
+            "scope": "constant",
+            "foreground": "var(light_purple)",
+        },
+        {
+            // constant.numeric.integer/float/hex/octal
+            "name": "Number",
+            "scope": "constant.numeric",
+            "foreground": "deepskyblue"
+        },
+        {
+            // Constants built into a language
+            // i.e. Booleans, Null values, etc
+            "name": "Language Constant",
+            "scope": "constant.language, constant.other",
+            "foreground": "var(light_purple)"
+        },
+        {
+            // Character escapes in strings
+            // i.e. \n and \x20
+            // Formatting placeholders
+            // i.e. %s, {}, and things used in sprintf(),
+            "name": "Character Escapes and Formatting Placeholders",
+            "scope": "constant.character.escape, constant.other.placeholder",
+            "foreground": "var(light_purple)",
+            "font_style": "bold"
+        },
+        // Entities
+        // Entity scopes are generally assigned to the names of data structures, types and other uniquely-identifiable constructs in code and markup
+        {
+            "name": "Default Entity Name",
+            "scope": "entity.name",
+            "foreground": "royalblue"
+        },
+        {
+            "name": "Class Names",
+            "scope": "entity.name.class",
+            "foreground": "blue",
+            "font_style": "bold"
+        },
+        {
+            "name": "Inherited Class Names",
+            "scope": "entity.other.inherited-class",
+            "foreground": "var(light_blue)"
+        },
+        {
+            "name": "Defined Function Names",
+            "scope": "entity.name.function",
+            "foreground": "royalblue",
+            "font_style": "bold"
+        },
+        {
+            "name": "Tags",
+            "scope": "entity.name.tag, entity.name.section, entity.name.label, punctuation.definition.tag.end, punctuation.definition.tag.begin, punctuation.definition.tag",
+            "foreground": "royalblue"
+        },
+        {
+            "name": "Tag Attributes",
+            "scope": "entity.other.attribute-name",
+            "foreground": "var(light_blue)"
+        },
+        // Keywords
+        {
+            "name": "Default Keyword",
+            "scope": "keyword",
+            "foreground": "var(dark_teal)"
+        },
+        {
+            // Control keywords examples include if, try, end and while
+            // keyword.control.conditional, keyword.import
+            "name": "Control Keywords",
+            "scope": "keyword.control",
+            "foreground": "var(dark_teal)"
+        },
+        {
+            // keyword.operator.assignment, keyword.operator.arithmetic, keyword.operator.bitwise, keyword.operator.logical, keyword.operator.word
+            "name": "Symbols and Word Operators",
+            "scope": "keyword.operator",
+            "foreground": "goldenrod",
+            "font_style": "bold"
+        },
+        // Storage
+        {
+            "name": "Types and Modifiers",
+            "scope": "storage.type, storage.modifier",
+            "foreground": "mediumblue",
+            "font_style": "bold"
+        },
+        // Variable
+        {
+            "name": "Default Variables",
+            "scope": "variable",
+            "foreground": "var(mediumblue)"
+        },
+        {
+            "name": "Global Variables",
+            "scope": "variable.other",
+            "foreground": "cadetblue"
+        },
+        {
+            "name": "Reserved Variable Names",
+            "scope": "variable.language",
+            "foreground": "var(light_purple)",
+            "font_style": "italic"
+        },
+        {
+            "name": "Parameters",
+            "scope": "variable.parameter",
+            "foreground": "var(light_blue)"
+        },
+        {
+            "name": "Called Functions",
+            "scope": "variable.function",
+            "foreground": "royalblue"
+        },
+        // Support
+        {
+            "name": "Default Support",
+            "scope": "support",
+            "foreground": "mediumblue",
+        },
+        {
+            "name": "Support Constant",
+            "scope": "support.constant",
+            "foreground": "var(light_purple)",
+        },
+        {
+            "name": "Support Function",
+            "scope": "support.function",
+            "foreground": "royalblue",
+        },
+        // Invalid
+        {
+            "name": "Illegal Elements",
+            "scope": "invalid",
+            "foreground": "crimson"
+        },
+        {
+            "name": "Deprecated Elements",
+            "scope": "invalid_deprecated",
+            "foreground": "var(orange)"
+        }
+    ]
+}
