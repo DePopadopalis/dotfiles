@@ -42,7 +42,7 @@ $global:GitPromptSettings = [pscustomobject]@{
     BranchBackgroundColor                       = $null
 
     BranchGoneStatusSymbol                      = [char]0x00D7 # × Multiplication sign
-    BranchGoneStatusForegroundColor             = [ConsoleColor]::DarkDarkCyan
+    BranchGoneStatusForegroundColor             = [ConsoleColor]::DarkCyan
     BranchGoneStatusBackgroundColor             = $null
 
     BranchIdenticalStatusToSymbol               = [char]0x2261 # ≡ Three horizontal lines
@@ -52,7 +52,7 @@ $global:GitPromptSettings = [pscustomobject]@{
 
     BranchAheadStatusSymbol                     = [char]0x2191 # ↑ Up arrow
     BranchAheadStatusForegroundColor            = [ConsoleColor]::Green
-    BranchAheadStatusBackgroundColor            = $null
+    BranchAheadStatusBackgroundColor            = [ConsoleColor]::DarkBlue
 
     BranchBehindStatusSymbol                    = [char]0x2193 # ↓ Down arrow
     BranchBehindStatusForegroundColor           = [ConsoleColor]::Red
@@ -61,7 +61,7 @@ $global:GitPromptSettings = [pscustomobject]@{
     BranchBehindAndAheadStatusSymbol            = [char]0x2195 # ↕ Up & Down arrow
     # BranchBehindAndAheadStatusForegroundColor   = [ConsoleColor]::Yellow
     BranchBehindAndAheadStatusForegroundColor   = [ConsoleColor]::DarkYellow
-    BranchBehindAndAheadStatusBackgroundColor   = $null
+    BranchBehindAndAheadStatusBackgroundColor   = [ConsoleColor]::DarkBlue
 
     BeforeIndexText                             = ""
     BeforeIndexForegroundColor                  = [ConsoleColor]::DarkGreen
