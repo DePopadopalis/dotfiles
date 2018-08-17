@@ -5,7 +5,7 @@
     {
         "light_blue": "#399EE6",
         "ice_blue": "#77e9ff",
-        "purple": "#663399",
+        "cerulean": "#02A0CC",
         "light_purple": "#7F00FF",
         "dark_teal": "#006B84",
         "orange": "#FF8F40",
@@ -16,7 +16,8 @@
         // Unused or replaced colors
         // "darker_purple": "#51008F",
         // "main_blue": "#0811CC", // replaced with var(light_blue)
-        // "bright_green": "#00C420",
+        "bright_green": "#00C420",
+        // "purple": "#663399",
     },
     "globals":
     {
@@ -133,7 +134,7 @@
         {
             "name": "Inherited Class Names",
             "scope": "entity.other.inherited-class",
-            "foreground": "seagreen"
+            "foreground": "var(cerulean)"
         },
         {
             "name": "Defined Function Names",
@@ -149,7 +150,7 @@
         {
             "name": "Tag Attributes",
             "scope": "entity.other.attribute-name",
-            "foreground": "seagreen"
+            "foreground": "var(cerulean)"
         },
         // Keywords
         {
@@ -200,13 +201,13 @@
         {
             "name": "Reserved Variable Names",
             "scope": "variable.language",
-            "foreground": "var(light_blue)",
+            "foreground": "dodgerblue",
             "font_style": ""
         },
         {
             "name": "Parameters",
             "scope": "variable.parameter",
-            "foreground": "seagreen"
+            "foreground": "var(cerulean)"
         },
         {
             "name": "Called Functions",
@@ -217,7 +218,7 @@
         {
             "name": "Default Support",
             "scope": "support",
-            "foreground": "bluef",
+            "foreground": "blue",
         },
         {
             "name": "Support Constant",
@@ -239,6 +240,17 @@
             "name": "Deprecated Elements",
             "scope": "invalid_deprecated",
             "foreground": "var(orange)"
+        },
+        // JSON
+        {
+            "name": "JSON KEY",
+            "scope": "source.json meta meta.structcure.dictionary.json string.quoted.double.json",
+            "foreground": "var(cerulean)"
+        },
+        {
+            "name": "JSON VALUE",
+            "scope": "source.json meta meta.structcure.dictionary.json meta.structcure.dictionary.value.json string.quoted.double.json",
+            "foreground": "royalblue"
         }
     ]
 }
