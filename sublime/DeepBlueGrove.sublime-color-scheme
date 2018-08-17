@@ -11,18 +11,18 @@
         "orange": "#FF8F40",
 
         "background": "#FAFAFC",
-        "foreground": "var(purple)",
+        "foreground": "var(dark_teal)",
 
         // Unused or replaced colors
         // "darker_purple": "#51008F",
-        // "main_blue": "#0811CC", // replaced with mediumblue
+        // "main_blue": "#0811CC", // replaced with var(light_blue)
         // "bright_green": "#00C420",
     },
     "globals":
     {
         "background": "var(background)",
         "foreground": "var(foreground)",
-        "caret": "gold",
+        "caret": "goldenrod",
 
         // Gutter
         "gutter": "",
@@ -53,7 +53,7 @@
         // Find
         "highlight": "gold",
         "find_highlight": "color(gold alpha(0.31))",
-        "find_highlight_foreground": "var(purple)",
+        "find_highlight_foreground": "var(dark_teal)",
 
         // Guides
         "guide": "color(dimgray alpha(0.1))",
@@ -86,13 +86,13 @@
         {
             "name": "String",
             "scope": "string",
-            "foreground": "mediumblue",
+            "foreground": "royalblue",
         },
         // Constants
         {
             "name": "Default Constant",
             "scope": "constant",
-            "foreground": "var(light_purple)",
+            "foreground": "var(light_blue)",
         },
         {
             // constant.numeric.integer/float/hex/octal
@@ -105,7 +105,7 @@
             // i.e. Booleans, Null values, etc
             "name": "Language Constant",
             "scope": "constant.language, constant.other",
-            "foreground": "var(light_purple)"
+            "foreground": "var(light_blue)"
         },
         {
             // Character escapes in strings
@@ -114,75 +114,83 @@
             // i.e. %s, {}, and things used in sprintf(),
             "name": "Character Escapes and Formatting Placeholders",
             "scope": "constant.character.escape, constant.other.placeholder",
-            "foreground": "var(light_purple)",
-            "font_style": "bold"
+            "foreground": "var(light_blue)",
+            "font_style": ""
         },
         // Entities
         // Entity scopes are generally assigned to the names of data structures, types and other uniquely-identifiable constructs in code and markup
         {
             "name": "Default Entity Name",
             "scope": "entity.name",
-            "foreground": "royalblue"
+            "foreground": "var(light_purple)"
         },
         {
             "name": "Class Names",
             "scope": "entity.name.class",
-            "foreground": "blue",
-            "font_style": "bold"
+            "foreground": "var(light_purple)",
+            "font_style": ""
         },
         {
             "name": "Inherited Class Names",
             "scope": "entity.other.inherited-class",
-            "foreground": "var(light_blue)"
+            "foreground": "seagreen"
         },
         {
             "name": "Defined Function Names",
             "scope": "entity.name.function",
-            "foreground": "royalblue",
-            "font_style": "bold"
+            "foreground": "var(light_purple)",
+            "font_style": ""
         },
         {
             "name": "Tags",
             "scope": "entity.name.tag, entity.name.section, entity.name.label, punctuation.definition.tag.end, punctuation.definition.tag.begin, punctuation.definition.tag",
-            "foreground": "royalblue"
+            "foreground": "var(light_purple)"
         },
         {
             "name": "Tag Attributes",
             "scope": "entity.other.attribute-name",
-            "foreground": "var(light_blue)"
+            "foreground": "seagreen"
         },
         // Keywords
         {
             "name": "Default Keyword",
             "scope": "keyword",
-            "foreground": "var(dark_teal)"
+            "foreground": "dodgerblue"
         },
         {
             // Control keywords examples include if, try, end and while
             // keyword.control.conditional, keyword.import
             "name": "Control Keywords",
             "scope": "keyword.control",
-            "foreground": "var(dark_teal)"
+            "foreground": "dodgerblue"
         },
         {
             // keyword.operator.assignment, keyword.operator.arithmetic, keyword.operator.bitwise, keyword.operator.logical, keyword.operator.word
-            "name": "Symbols and Word Operators",
+            // Catchall for all operators including words
+            "name": "Word Operators",
             "scope": "keyword.operator",
-            "foreground": "goldenrod",
-            "font_style": "bold"
+            "foreground": "darkgoldenrod",
+            "font_style": ""
+        },
+        {
+            // keyword.operator.assignment, keyword.operator.arithmetic, keyword.operator.bitwise, keyword.operator.logical, keyword.operator.word
+            "name": "Symbol Operators",
+            "scope": "keyword.operator.assignment, keyword.operator.arithmetic, keyword.operator.bitwise",
+            "foreground": "darkgoldenrod",
+            "font_style": ""
         },
         // Storage
         {
             "name": "Types and Modifiers",
             "scope": "storage.type, storage.modifier",
-            "foreground": "mediumblue",
-            "font_style": "bold"
+            "foreground": "blue",
+            "font_style": ""
         },
         // Variable
         {
             "name": "Default Variables",
             "scope": "variable",
-            "foreground": "var(mediumblue)"
+            "foreground": "var(light_blue)"
         },
         {
             "name": "Global Variables",
@@ -192,34 +200,34 @@
         {
             "name": "Reserved Variable Names",
             "scope": "variable.language",
-            "foreground": "var(light_purple)",
-            "font_style": "italic"
+            "foreground": "var(light_blue)",
+            "font_style": ""
         },
         {
             "name": "Parameters",
             "scope": "variable.parameter",
-            "foreground": "var(light_blue)"
+            "foreground": "seagreen"
         },
         {
             "name": "Called Functions",
             "scope": "variable.function",
-            "foreground": "royalblue"
+            "foreground": "var(light_purple)"
         },
         // Support
         {
             "name": "Default Support",
             "scope": "support",
-            "foreground": "mediumblue",
+            "foreground": "bluef",
         },
         {
             "name": "Support Constant",
             "scope": "support.constant",
-            "foreground": "var(light_purple)",
+            "foreground": "var(light_blue)",
         },
         {
             "name": "Support Function",
             "scope": "support.function",
-            "foreground": "royalblue",
+            "foreground": "var(light_purple)",
         },
         // Invalid
         {
