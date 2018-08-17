@@ -11,7 +11,7 @@
         "bright_green": "#00C420",
         "orange": "#FF8F40",
 
-        "background": "#FAFAFC",
+        "background": "snow",
         "foreground": "var(dark_teal)",
 
         // Unused or replaced colors
@@ -26,7 +26,7 @@
         "caret": "goldenrod",
 
         // Gutter
-        "gutter": "",
+        "gutter": "color(seashell alpha(.3))",
         "line_highlight": "color(dimgray alpha(0.13))",
         "gutter_foreground": "color(var(foreground) alpha(0.5))",
 
