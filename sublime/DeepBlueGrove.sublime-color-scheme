@@ -8,6 +8,7 @@
         "cerulean": "#02A0CC",
         "light_purple": "#7F00FF",
         "dark_teal": "#006B84",
+        "bright_green": "#00C420",
         "orange": "#FF8F40",
 
         "background": "#FAFAFC",
@@ -15,8 +16,7 @@
 
         // Unused or replaced colors
         // "darker_purple": "#51008F",
-        // "main_blue": "#0811CC", // replaced with var(light_blue)
-        "bright_green": "#00C420",
+        // "main_blue": "#0811CC", // replaced with var(bright_green)
         // "purple": "#663399",
     },
     "globals":
@@ -93,20 +93,20 @@
         {
             "name": "Default Constant",
             "scope": "constant",
-            "foreground": "var(light_blue)",
+            "foreground": "var(bright_green)",
         },
         {
             // constant.numeric.integer/float/hex/octal
             "name": "Number",
             "scope": "constant.numeric",
-            "foreground": "deepskyblue"
+            "foreground": "var(bright_green)"
         },
         {
             // Constants built into a language
             // i.e. Booleans, Null values, etc
             "name": "Language Constant",
             "scope": "constant.language, constant.other",
-            "foreground": "var(light_blue)"
+            "foreground": "var(bright_green)"
         },
         {
             // Character escapes in strings
@@ -115,7 +115,7 @@
             // i.e. %s, {}, and things used in sprintf(),
             "name": "Character Escapes and Formatting Placeholders",
             "scope": "constant.character.escape, constant.other.placeholder",
-            "foreground": "var(light_blue)",
+            "foreground": "var(bright_green)",
             "font_style": ""
         },
         // Entities
@@ -134,7 +134,7 @@
         {
             "name": "Inherited Class Names",
             "scope": "entity.other.inherited-class",
-            "foreground": "var(cerulean)"
+            "foreground": "deepskyblue"
         },
         {
             "name": "Defined Function Names",
@@ -150,7 +150,7 @@
         {
             "name": "Tag Attributes",
             "scope": "entity.other.attribute-name",
-            "foreground": "var(cerulean)"
+            "foreground": "deepskyblue"
         },
         // Keywords
         {
@@ -170,14 +170,14 @@
             // Catchall for all operators including words
             "name": "Word Operators",
             "scope": "keyword.operator",
-            "foreground": "darkgoldenrod",
+            "foreground": "dodgerblue",
             "font_style": ""
         },
         {
             // keyword.operator.assignment, keyword.operator.arithmetic, keyword.operator.bitwise, keyword.operator.logical, keyword.operator.word
             "name": "Symbol Operators",
             "scope": "keyword.operator.assignment, keyword.operator.arithmetic, keyword.operator.bitwise",
-            "foreground": "darkgoldenrod",
+            "foreground": "dodgerblue",
             "font_style": ""
         },
         // Storage
@@ -191,12 +191,12 @@
         {
             "name": "Default Variables",
             "scope": "variable",
-            "foreground": "var(light_blue)"
+            "foreground": "var(bright_green)"
         },
         {
             "name": "Global Variables",
             "scope": "variable.other",
-            "foreground": "cadetblue"
+            "foreground": "var(cerulean)"
         },
         {
             "name": "Reserved Variable Names",
@@ -207,7 +207,7 @@
         {
             "name": "Parameters",
             "scope": "variable.parameter",
-            "foreground": "var(cerulean)"
+            "foreground": "deepskyblue"
         },
         {
             "name": "Called Functions",
@@ -221,9 +221,23 @@
             "foreground": "blue",
         },
         {
+            // built in functions like str
+            "name": "Support Type",
+            "scope": "support.type",
+            "foreground": "var(light_purple)",
+            "font_style": ""
+        },
+        {
+            // Not sure. Sometimes bundled with support.type
+            "name": "Default Class",
+            "scope": "support.class",
+            "foreground": "var(light_purple)",
+            "font_style": ""
+        },
+        {
             "name": "Support Constant",
             "scope": "support.constant",
-            "foreground": "var(light_blue)",
+            "foreground": "var(bright_green)",
         },
         {
             "name": "Support Function",
