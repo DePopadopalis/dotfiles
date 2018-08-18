@@ -2,12 +2,48 @@
 Import-Module posh-git
 Import-Module oh-my-posh
 
+# FUNCTIONS
+function U
+{
+    param
+    (
+        [int] $Code
+    )
+ 
+    if ((0 -le $Code) -and ($Code -le 0xFFFF))
+    {
+        return [char] $Code
+    }
+ 
+    if ((0x10000 -le $Code) -and ($Code -le 0x10FFFF))
+    {
+        return [char]::ConvertFromUtf32($Code)
+    }
+ 
+    throw "Invalid character code $Code"
+}
+
+function Put-CursorOnBottom
+{
+    $rawUI = (Get-Host).UI.RawUI
+    $cp = $rawUI.CursorPosition
+    $cp.Y = $rawUI.BufferSize.Height - 1
+    $rawUI.CursorPosition = $cp
+}
+
+function CustomClear
+{
+    clear
+    Put-CursorOnBottom
+}
+
 # Set Aliases
 # New-Alias which Get-Command   # Not needed with ConEmu
 # New-Alias touch New-Item      # Not needed with ConEmu
 # Set l and ls alias to use the new Get-ChildItemColor cmdlets
 Set-Alias ll Get-ChildItemColor -Option AllScope
 Set-Alias ls Get-ChildItemColorFormatWide -Option AllScope
+Set-Alias cl CustomClear
 
 # Disable beeping noise
 Set-PSReadlineOption -BellStyle None
@@ -34,24 +70,5 @@ Set-PSReadlineOption -TokenKind number -ForegroundColor Red
 Set-PSReadlineOption -TokenKind member -ForegroundColor White
 
 Set-Theme DeepBlueGrove
+Put-CursorOnBottom
 
-# FUNCTIONS
-function U
-{
-    param
-    (
-        [int] $Code
-    )
- 
-    if ((0 -le $Code) -and ($Code -le 0xFFFF))
-    {
-        return [char] $Code
-    }
- 
-    if ((0x10000 -le $Code) -and ($Code -le 0x10FFFF))
-    {
-        return [char]::ConvertFromUtf32($Code)
-    }
- 
-    throw "Invalid character code $Code"
-}
