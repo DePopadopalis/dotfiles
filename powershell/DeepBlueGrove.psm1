@@ -13,6 +13,22 @@ function Write-Theme {
     $lastBackgroundColor = $sl.Colors.SessionInfoBackgroundColor
     $sectionSegmentForwardSymbol = $sl.PromptSymbols.TopSegmentForwardSymbol
 
+    # check the last command state and indicate if failed
+    If ($lastCommandFailed) {
+        $sl.Colors.CurrentAdminIconForegroundColor = [ConsoleColor]::DarkRed
+        # $sl.Colors.CurrentPathBackgroundColor = [ConsoleColor]::DarkRed
+        # $sl.Colors.CurrentPathForegroundColor = [ConsoleColor]::Black
+        $sl.Colors.CurrentSessionInfoBackgroundColor = [ConsoleColor]::DarkRed
+        $sl.Colors.CurrentSessionInfoForegroundColor = [ConsoleColor]::Black
+        $lastBackgroundColor = [ConsoleColor]::DarkRed
+    }
+    Else {
+        $sl.Colors.CurrentAdminIconForegroundColor = $sl.Colors.AdminIconForegroundColor
+        # $sl.Colors.CurrentPathBackgroundColor = $sl.Colors.PathBackgroundColor
+        # $sl.Colors.CurrentPathForegroundColor = $sl.Colors.PathForegroundColor
+        $sl.Colors.CurrentSessionInfoBackgroundColor = $sl.Colors.SessionInfoBackgroundColor
+        $sl.Colors.CurrentSessionInfoForegroundColor = $sl.Colors.SessionInfoForegroundColor
+    }
     ### PROMPT FIRST LINE ###
     $prompt = Write-Prompt -Object $sl.PromptSymbols.TopStartSymbol -BackgroundColor $sl.Colors.TerminalBackgroundColor -ForegroundColor $lastBackgroundColor
 
@@ -23,33 +39,23 @@ function Write-Theme {
     # $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $lastBackgroundColor
 
     # Write user/host info to line
-    # $user = [System.Environment]::UserName
-    $user = "depop"
-    $computer = Get-ComputerName
+    $user = [System.Environment]::UserName
+    # $computer = Get-ComputerName
     if (Test-NotDefaultUser($user)) {
-        $prompt += Write-Prompt -Object "$user@$computer " -BackgroundColor $sl.Colors.SessionInfoBackgroundColor -ForegroundColor $sl.Colors.SessionInfoForegroundColor
-        $lastBackgroundColor = $sl.Colors.SessionInfoBackgroundColor
+        $prompt += Write-Prompt -Object "$user " -BackgroundColor $sl.Colors.CurrentSessionInfoBackgroundColor -ForegroundColor $sl.Colors.CurrentSessionInfoForegroundColor
+        $lastBackgroundColor = $sl.Colors.CurrentSessionInfoBackgroundColor
     }
+
+    # Separate sessioninfo and path
+    $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.TerminalBackgroundColor
+    $lastBackgroundColor = $sl.Colors.TerminalBackgroundColor
 
     # Write path to terminal portion
     # $path += Get-ShortPath -dir $pwd
     $path += Get-FullPath -dir $pwd
-
-    # check the last command state and indicate if failed
-    If ($lastCommandFailed) {
-        # $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FailedCommandSymbol)" -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor
-        $sl.Colors.ErrorPathBackgroundColor = [ConsoleColor]::DarkRed
-        $sl.Colors.ErrorPathForegroundColor = [ConsoleColor]::Black
-        $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.ErrorPathBackgroundColor
-        $prompt += Write-Prompt -Object " $($path) " -BackgroundColor $sl.Colors.ErrorPathBackgroundColor -ForegroundColor $sl.Colors.ErrorPathForegroundColor
-        $lastBackgroundColor = $sl.Colors.ErrorPathBackgroundColor
-    }
-    Else {
-        $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.PathBackgroundColor
-        $prompt += Write-Prompt -Object " $($path) " -BackgroundColor $sl.Colors.PathBackgroundColor -ForegroundColor $sl.Colors.PathForegroundColor
-        $lastBackgroundColor = $sl.Colors.PathBackgroundColor        
-    }
-
+    $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.CurrentPathBackgroundColor
+    $prompt += Write-Prompt -Object " $($path) " -BackgroundColor $sl.Colors.CurrentPathBackgroundColor -ForegroundColor $sl.Colors.CurrentPathForegroundColor
+    $lastBackgroundColor = $sl.Colors.CurrentPathBackgroundColor
 
     # This always happens?
     if (Test-VirtualEnv) {
@@ -86,7 +92,7 @@ function Write-Theme {
 
     # check for elevated prompt
     If (Test-Administrator) {
-        $prompt += Write-Prompt -Object $sl.PromptSymbols.ElevatedSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.AdminIconForegroundColor
+        $prompt += Write-Prompt -Object $sl.PromptSymbols.ElevatedSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.CurrentAdminIconForegroundColor
     }
 
     # Writes the postfix to the prompt
@@ -119,7 +125,6 @@ $sl.PromptSymbols.TopStartSymbol = [char]::ConvertFromUtf32(0xe0b6)
 $sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xf00d)
 $sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xe614)
 
-$sl.PromptSymbols.CharacterSegmentDivider = [char]::ConvertFromUtf32(0xE0d4)
 $sl.PromptSymbols.TopSegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0be)
 $sl.PromptSymbols.BottomSegmentForwardSymbol = [char]::ConvertFromUtf32(0xe285)
 
@@ -128,14 +133,13 @@ $sl.Colors.TerminalBackgroundColor = [ConsoleColor]::Black
 $sl.Colors.TerminalForegroundColor = [ConsoleColor]::White
 
 $sl.Colors.StartSymbolBackgroundColor = [ConsoleColor]::Black
-$sl.Colors.SegmentDividerColor = [ConsoleColor]::Yellow
 $sl.Colors.CommandFailedIconForegroundColor = [ConsoleColor]::Yellow
-$sl.Colors.AdminIconForegroundColor = [ConsoleColor]::DarkRed
+$sl.Colors.AdminIconForegroundColor = [ConsoleColor]::White
 
 $sl.Colors.SessionInfoBackgroundColor = [ConsoleColor]::White
 $sl.Colors.SessionInfoForegroundColor = [ConsoleColor]::Black
 
-$sl.Colors.PathBackgroundColor = [ConsoleColor]::Green
+$sl.Colors.PathBackgroundColor = [ConsoleColor]::White
 $sl.Colors.PathForegroundColor = [ConsoleColor]::Black
 
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::Yellow
