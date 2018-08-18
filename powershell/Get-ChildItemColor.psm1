@@ -1,5 +1,5 @@
 $OriginalForegroundColor = $Host.UI.RawUI.ForegroundColor
-if ([System.Enum]::IsDefined([System.ConsoleColor], 1) -eq "False") { $OriginalForegroundColor = "Gray" }
+if ([System.Enum]::IsDefined([System.ConsoleColor], 1) -eq "False") { $OriginalForegroundColor = "White" }
 
 $CompressedList = @(".7z", ".gz", ".rar", ".tar", ".zip")
 $ExecutableList = @(".exe", ".bat", ".cmd", ".py", ".pl", ".ps1",
@@ -11,18 +11,18 @@ $ConfigsList = @(".cfg", ".conf", ".config", ".ini", ".json")
 $ColorTable = @{}
 
 $ColorTable.Add('Default', $OriginalForegroundColor) 
-$ColorTable.Add('Directory', "Green") 
+$ColorTable.Add('Directory', "DarkBlue") 
 
 ForEach ($Extension in $CompressedList) {
     $ColorTable.Add($Extension, "Yellow")
 }
 
 ForEach ($Extension in $ExecutableList) {
-    $ColorTable.Add($Extension, "Blue")
+    $ColorTable.Add($Extension, "Magenta")
 }
 
 ForEach ($Extension in $TextList) {
-    $ColorTable.Add($Extension, "Cyan")
+    $ColorTable.Add($Extension, "White")
 }
 
 ForEach ($Extension in $DllPdbList) {
