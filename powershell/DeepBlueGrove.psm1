@@ -16,16 +16,16 @@ function Write-Theme {
     # check the last command state and indicate if failed
     If ($lastCommandFailed) {
         $sl.Colors.CurrentAdminIconForegroundColor = [ConsoleColor]::DarkRed
-        # $sl.Colors.CurrentPathBackgroundColor = [ConsoleColor]::DarkRed
-        # $sl.Colors.CurrentPathForegroundColor = [ConsoleColor]::Black
+        $sl.Colors.CurrentPathBackgroundColor = $sl.Colors.PathBackgroundColor
+        $sl.Colors.CurrentPathForegroundColor = $sl.Colors.PathForegroundColor
         $sl.Colors.CurrentSessionInfoBackgroundColor = [ConsoleColor]::DarkRed
         $sl.Colors.CurrentSessionInfoForegroundColor = [ConsoleColor]::Black
         $lastBackgroundColor = [ConsoleColor]::DarkRed
     }
     Else {
         $sl.Colors.CurrentAdminIconForegroundColor = $sl.Colors.AdminIconForegroundColor
-        # $sl.Colors.CurrentPathBackgroundColor = $sl.Colors.PathBackgroundColor
-        # $sl.Colors.CurrentPathForegroundColor = $sl.Colors.PathForegroundColor
+        $sl.Colors.CurrentPathBackgroundColor = $sl.Colors.PathBackgroundColor
+        $sl.Colors.CurrentPathForegroundColor = $sl.Colors.PathForegroundColor
         $sl.Colors.CurrentSessionInfoBackgroundColor = $sl.Colors.SessionInfoBackgroundColor
         $sl.Colors.CurrentSessionInfoForegroundColor = $sl.Colors.SessionInfoForegroundColor
     }
@@ -42,7 +42,7 @@ function Write-Theme {
     $user = [System.Environment]::UserName
     # $computer = Get-ComputerName
     if (Test-NotDefaultUser($user)) {
-        $prompt += Write-Prompt -Object "$user " -BackgroundColor $sl.Colors.CurrentSessionInfoBackgroundColor -ForegroundColor $sl.Colors.CurrentSessionInfoForegroundColor
+        $prompt += Write-Prompt -Object "$user" -BackgroundColor $sl.Colors.CurrentSessionInfoBackgroundColor -ForegroundColor $sl.Colors.CurrentSessionInfoForegroundColor
         $lastBackgroundColor = $sl.Colors.CurrentSessionInfoBackgroundColor
     }
 
