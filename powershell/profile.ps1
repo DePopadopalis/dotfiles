@@ -21,15 +21,16 @@ Set-PSReadlineOption -BellStyle None
 #   DarkCyan=cerulean | DarkRed=crimson | DarkMagenta=purple |
 #   DarkYellow=goldenrod | DarkGray=black
 
-Set-PSReadlineOption -TokenKind comment -ForegroundColor DarkGray
 Set-PSReadlineOption -TokenKind none -ForegroundColor White
-Set-PSReadlineOption -TokenKind command -ForegroundColor DarkBlue
-Set-PSReadlineOption -TokenKind parameter -ForegroundColor Magenta
-Set-PSReadlineOption -TokenKind variable -ForegroundColor DarkRed
-Set-PSReadlineOption -TokenKind type -ForegroundColor DarkMagenta
-Set-PSReadlineOption -TokenKind number -ForegroundColor Red
+Set-PSReadlineOption -TokenKind comment -ForegroundColor Gray
+Set-PSReadlineOption -TokenKind keyword -ForegroundColor DarkGray
 Set-PSReadlineOption -TokenKind string -ForegroundColor DarkCyan
 Set-PSReadlineOption -TokenKind operator -ForegroundColor White
+Set-PSReadlineOption -TokenKind variable -ForegroundColor DarkRed
+Set-PSReadlineOption -TokenKind command -ForegroundColor White
+Set-PSReadlineOption -TokenKind parameter -ForegroundColor Magenta
+Set-PSReadlineOption -TokenKind type -ForegroundColor DarkMagenta
+Set-PSReadlineOption -TokenKind number -ForegroundColor Red
 Set-PSReadlineOption -TokenKind member -ForegroundColor White
 
 Set-Theme DeepBlueGrove
