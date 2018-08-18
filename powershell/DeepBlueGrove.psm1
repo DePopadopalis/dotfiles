@@ -11,39 +11,49 @@ function Write-Theme {
 
     # Set background color for special symbols and dividers before session info
     $lastBackgroundColor = $sl.Colors.SessionInfoBackgroundColor
+    $sectionSegmentForwardSymbol = $sl.PromptSymbols.TopSegmentForwardSymbol
 
     ### PROMPT FIRST LINE ###
-    # Initial Symbol
-    # $prompt = Write-Prompt -Object $sl.PromptSymbols.TopStartSymbol -ForegroundColor $sl.Colors.InitialSectionForegroundColor -BackgroundColor $sl.Colors.StartSymbolBackgroundColor
-
-    # Check if additional icons need to be added
-    # check the last command state and indicate if failed
-    If ($lastCommandFailed) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FailedCommandSymbol) " -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor
-    }
-    # check for elevated prompt
-    If (Test-Administrator) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.ElevatedSymbol) " -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.AdminIconForegroundColor
-    }
+    $prompt = Write-Prompt -Object $sl.PromptSymbols.TopStartSymbol -BackgroundColor $sl.Colors.TerminalBackgroundColor -ForegroundColor $lastBackgroundColor
 
     # Session section begin
     # Individual character divider
     # $prompt += Write-Prompt -Object "$($sl.PromptSymbols.CharacterSegmentDivider) " -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.SegmentDividerColor
     # Full section divider
-    # $prompt += Write-Prompt -Object "$($sl.PromptSymbols.TopSegmentForwardSymbol) " -BackgroundColor $lastBackgroundColor -ForegroundColor $lastBackgroundColor
+    # $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $lastBackgroundColor
 
     # Write user/host info to line
     # $user = [System.Environment]::UserName
     $user = "depop"
     $computer = Get-ComputerName
     if (Test-NotDefaultUser($user)) {
-        $prompt += Write-Prompt -Object " $user@$computer " -BackgroundColor $sl.Colors.SessionInfoBackgroundColor -ForegroundColor $sl.Colors.SessionInfoForegroundColor
+        $prompt += Write-Prompt -Object "$user@$computer " -BackgroundColor $sl.Colors.SessionInfoBackgroundColor -ForegroundColor $sl.Colors.SessionInfoForegroundColor
         $lastBackgroundColor = $sl.Colors.SessionInfoBackgroundColor
     }
 
+    # Write path to terminal portion
+    # $path += Get-ShortPath -dir $pwd
+    $path += Get-FullPath -dir $pwd
+
+    # check the last command state and indicate if failed
+    If ($lastCommandFailed) {
+        # $prompt += Write-Prompt -Object "$($sl.PromptSymbols.FailedCommandSymbol)" -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.CommandFailedIconForegroundColor
+        $sl.Colors.ErrorPathBackgroundColor = [ConsoleColor]::DarkRed
+        $sl.Colors.ErrorPathForegroundColor = [ConsoleColor]::Black
+        $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.ErrorPathBackgroundColor
+        $prompt += Write-Prompt -Object " $($path) " -BackgroundColor $sl.Colors.ErrorPathBackgroundColor -ForegroundColor $sl.Colors.ErrorPathForegroundColor
+        $lastBackgroundColor = $sl.Colors.ErrorPathBackgroundColor
+    }
+    Else {
+        $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.PathBackgroundColor
+        $prompt += Write-Prompt -Object " $($path) " -BackgroundColor $sl.Colors.PathBackgroundColor -ForegroundColor $sl.Colors.PathForegroundColor
+        $lastBackgroundColor = $sl.Colors.PathBackgroundColor        
+    }
+
+
     # This always happens?
     if (Test-VirtualEnv) {
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.TopSegmentForwardSymbol) " -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.VirtualEnvBackgroundColor
+        $prompt += Write-Prompt -Object "$($sectionSegmentForwardSymbol) " -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.VirtualEnvBackgroundColor
         $prompt += Write-Prompt -Object "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -BackgroundColor $sl.Colors.VirtualEnvBackgroundColor -ForegroundColor $sl.Colors.VirtualEnvForegroundColor
         $lastBackgroundColor = $sl.VirtualEnvBackgroundColor
     }
@@ -55,32 +65,32 @@ function Write-Theme {
     $status = Get-VCSStatus
     if ($status) {
         $themeInfo = Get-VcsInfo -status ($status)
-        $prompt += Write-Prompt -Object $sl.PromptSymbols.TopSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $themeInfo.BackgroundColor
+        $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $themeInfo.BackgroundColor
         $prompt += Write-Prompt -Object " $($themeInfo.VcInfo) " -BackgroundColor $themeInfo.BackgroundColor -ForegroundColor $sl.Colors.GitForegroundColor
         $lastBackgroundColor = $themeInfo.BackgroundColor
     }
 
     if ($with) {
-        $prompt += Write-Prompt -Object $sl.PromptSymbols.TopSegmentForwardSymbol -BackgroundColor $sl.Colors.StartSymbolBackgroundColor -ForegroundColor $lastBackgroundColor
+        $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $sl.Colors.StartSymbolBackgroundColor -ForegroundColor $lastBackgroundColor
         $prompt += Write-Prompt -Object " $($with.ToUpper()) " -BackgroundColor $sl.Colors.WithBackgroundColor -ForegroundColor $sl.Colors.WithForegroundColor
         $lastBackgroundColor = $sl.Colors.WithBackgroundColor
     }
 
     # Write top line end cap
-    $prompt += Write-Prompt -Object $sl.PromptSymbols.TopSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.TerminalBackgroundColor
+    $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.TerminalBackgroundColor
 
     ### PROMPT SECOND LINE ###
     $lastBackgroundColor = $sl.Colors.TerminalBackgroundColor
+    $sectionSegmentForwardSymbol = $sl.PromptSymbols.BottomSegmentForwardSymbol
     $prompt += Set-Newline
 
-    # Write path to terminal portion
-    # $path += Get-ShortPath -dir $pwd
-    $path += Get-FullPath -dir $pwd
-    $prompt += Write-Prompt -Object (Get-FullPath -dir $pwd) -BackgroundColor $sl.Colors.PathBackgroundColor -ForegroundColor $sl.Colors.PathForegroundColor
-    $lastBackgroundColor = $sl.Colors.PathBackgroundColor
+    # check for elevated prompt
+    If (Test-Administrator) {
+        $prompt += Write-Prompt -Object $sl.PromptSymbols.ElevatedSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.AdminIconForegroundColor
+    }
 
     # Writes the postfix to the prompt
-    $prompt += Write-Prompt -Object "$($sl.PromptSymbols.BottomSegmentForwardSymbol)" -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.TerminalBackgroundColor
+    $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.TerminalForegroundColor
     $prompt += ' '
     $prompt
 }
@@ -105,24 +115,27 @@ function Write-Theme {
 $sl = $global:ThemeSettings #local settings
 
 # Define Symbols
-$sl.PromptSymbols.TopStartSymbol = ""
-$sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xe20d)
-$sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xf0e7)
+$sl.PromptSymbols.TopStartSymbol = [char]::ConvertFromUtf32(0xe0b6)
+$sl.PromptSymbols.FailedCommandSymbol = [char]::ConvertFromUtf32(0xf00d)
+$sl.PromptSymbols.ElevatedSymbol = [char]::ConvertFromUtf32(0xe614)
 
 $sl.PromptSymbols.CharacterSegmentDivider = [char]::ConvertFromUtf32(0xE0d4)
 $sl.PromptSymbols.TopSegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0be)
-$sl.PromptSymbols.BottomSegmentForwardSymbol = [char]::ConvertFromUtf32(0xE0ba)
+$sl.PromptSymbols.BottomSegmentForwardSymbol = [char]::ConvertFromUtf32(0xe285)
 
 # Define Colors
 $sl.Colors.TerminalBackgroundColor = [ConsoleColor]::Black
+$sl.Colors.TerminalForegroundColor = [ConsoleColor]::White
 
 $sl.Colors.StartSymbolBackgroundColor = [ConsoleColor]::Black
 $sl.Colors.SegmentDividerColor = [ConsoleColor]::Yellow
+$sl.Colors.CommandFailedIconForegroundColor = [ConsoleColor]::Yellow
+$sl.Colors.AdminIconForegroundColor = [ConsoleColor]::DarkRed
 
 $sl.Colors.SessionInfoBackgroundColor = [ConsoleColor]::White
 $sl.Colors.SessionInfoForegroundColor = [ConsoleColor]::Black
 
-$sl.Colors.PathBackgroundColor = [ConsoleColor]::White
+$sl.Colors.PathBackgroundColor = [ConsoleColor]::Green
 $sl.Colors.PathForegroundColor = [ConsoleColor]::Black
 
 $sl.Colors.PromptHighlightColor = [ConsoleColor]::Yellow
