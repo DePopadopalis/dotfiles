@@ -37,6 +37,11 @@ function CustomClear
     Put-CursorOnBottom
 }
 
+function ChangeToWorkspace
+{
+    Set-Location "G:\Repositories\"
+}
+
 # Set Aliases
 # New-Alias which Get-Command   # Not needed with ConEmu
 # New-Alias touch New-Item      # Not needed with ConEmu
@@ -44,6 +49,7 @@ function CustomClear
 Set-Alias ll Get-ChildItemColor -Option AllScope
 Set-Alias ls Get-ChildItemColorFormatWide -Option AllScope
 Set-Alias cl CustomClear
+Set-Alias cws ChangeToWorkspace
 
 # Disable beeping noise
 Set-PSReadlineOption -BellStyle None
@@ -69,6 +75,7 @@ Set-PSReadlineOption -TokenKind type -ForegroundColor DarkMagenta
 Set-PSReadlineOption -TokenKind number -ForegroundColor Red
 Set-PSReadlineOption -TokenKind member -ForegroundColor White
 
+$ThemeSettings.MyThemesLocation = Split-Path $script:MyInvocation.MyCommand.Path
 Set-Theme DeepBlueGrove
 Put-CursorOnBottom
 
