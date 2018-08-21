@@ -43,7 +43,7 @@ function ChangeToWorkspace
 }
 
 # Set Aliases
-# New-Alias which Get-Command   # Not needed with ConEmu
+New-Alias which Get-Command   # Not needed with ConEmu
 # New-Alias touch New-Item      # Not needed with ConEmu
 # Set l and ls alias to use the new Get-ChildItemColor cmdlets
 Set-Alias ll Get-ChildItemColor -Option AllScope
