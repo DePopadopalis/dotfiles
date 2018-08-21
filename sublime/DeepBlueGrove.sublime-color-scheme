@@ -7,6 +7,7 @@
         "ice_blue": "#77e9ff",
         "cerulean": "#02A0CC",
         "light_purple": "#7F00FF",
+        "dark_purple": "indigo",
         "dark_teal": "#006B84",
         "bright_green": "#00C420",
         "orange": "#FF8F40",
@@ -123,7 +124,7 @@
         {
             "name": "Default Entity Name",
             "scope": "entity.name",
-            "foreground": "var(light_purple)"
+            "foreground": "var(dark_purple)"
         },
         {
             "name": "Class Names",
@@ -139,13 +140,13 @@
         {
             "name": "Defined Function Names",
             "scope": "entity.name.function",
-            "foreground": "var(light_purple)",
+            "foreground": "slateblue",
             "font_style": ""
         },
         {
             "name": "Tags",
             "scope": "entity.name.tag, entity.name.section, entity.name.label, punctuation.definition.tag.end, punctuation.definition.tag.begin, punctuation.definition.tag",
-            "foreground": "var(light_purple)"
+            "foreground": "var(dark_purple)"
         },
         {
             "name": "Tag Attributes",
@@ -182,6 +183,7 @@
         },
         // Storage
         {
+            // "class", "def", etc
             "name": "Types and Modifiers",
             "scope": "storage.type, storage.modifier",
             "foreground": "blue",
@@ -212,7 +214,7 @@
         {
             "name": "Called Functions",
             "scope": "variable.function",
-            "foreground": "crimson"
+            "foreground": "slateblue"
         },
         // Support
         {
@@ -231,7 +233,7 @@
             // Not sure. Sometimes bundled with support.type
             "name": "Default Class",
             "scope": "support.class",
-            "foreground": "var(light_purple)",
+            "foreground": "orangered",
             "font_style": ""
         },
         {
@@ -242,7 +244,7 @@
         {
             "name": "Support Function",
             "scope": "support.function",
-            "foreground": "crimson",
+            "foreground": "blue",
         },
         // Invalid
         {
