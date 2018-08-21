@@ -212,7 +212,7 @@
         {
             "name": "Called Functions",
             "scope": "variable.function",
-            "foreground": "orange"
+            "foreground": "crimson"
         },
         // Support
         {
@@ -242,7 +242,7 @@
         {
             "name": "Support Function",
             "scope": "support.function",
-            "foreground": "orange",
+            "foreground": "crimson",
         },
         // Invalid
         {
