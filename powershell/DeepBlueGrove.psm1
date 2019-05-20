@@ -57,11 +57,11 @@ function Write-Theme {
     $prompt += Write-Prompt -Object " $($path) " -BackgroundColor $sl.Colors.CurrentPathBackgroundColor -ForegroundColor $sl.Colors.CurrentPathForegroundColor
     $lastBackgroundColor = $sl.Colors.CurrentPathBackgroundColor
 
-    # This always happens?
+    # Virtual Environment
     if (Test-VirtualEnv) {
-        $prompt += Write-Prompt -Object "$($sectionSegmentForwardSymbol) " -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.VirtualEnvBackgroundColor
-        $prompt += Write-Prompt -Object "$($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -BackgroundColor $sl.Colors.VirtualEnvBackgroundColor -ForegroundColor $sl.Colors.VirtualEnvForegroundColor
-        $lastBackgroundColor = $sl.VirtualEnvBackgroundColor
+        $prompt += Write-Prompt -Object $sectionSegmentForwardSymbol -BackgroundColor $lastBackgroundColor -ForegroundColor $sl.Colors.VirtualEnvBackgroundColor
+        $prompt += Write-Prompt -Object " $($sl.PromptSymbols.VirtualEnvSymbol) $(Get-VirtualEnvName) " -BackgroundColor $sl.Colors.VirtualEnvBackgroundColor -ForegroundColor $sl.Colors.VirtualEnvForegroundColor
+        $lastBackgroundColor = $sl.Colors.VirtualEnvBackgroundColor 
     }
     else {
         
@@ -152,5 +152,5 @@ $sl.Colors.GitNoLocalChangesAndAheadColor = [ConsoleColor]::Yellow
 # ???
 $sl.Colors.WithForegroundColor = [ConsoleColor]::White
 $sl.Colors.WithBackgroundColor = [ConsoleColor]::DarkRed
-$sl.Colors.VirtualEnvBackgroundColor = [System.ConsoleColor]::Red
-$sl.Colors.VirtualEnvForegroundColor = [System.ConsoleColor]::White
+$sl.Colors.VirtualEnvBackgroundColor = [System.ConsoleColor]::DarkGray
+$sl.Colors.VirtualEnvForegroundColor = [System.ConsoleColor]::Black
